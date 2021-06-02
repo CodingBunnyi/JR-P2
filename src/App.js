@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
+import Current from './app/Current';
+import OtherCities from './app/OtherCities';
+import Forecast from './app/Forecast';
+const Main = styled.div`
+  min-height: 100vh;
+  background-image: url('https://wallpaperaccess.com/full/2629319.png');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const AppContainer = styled.div`
+
+`;
+
+const Top = styled.div`
+
+`;
+
+const Bottom = styled.div`
+
+`;
+
+class App extends React.Component {
+  render() {
+    return (
+      <Main>
+        <AppContainer>
+          <Top>
+            <Current />
+          </Top>
+          <Bottom>
+            <OtherCities />
+            <Forecast />
+          </Bottom>
+        </AppContainer>
+      </Main>
+    )
+  }
 }
 
 export default App;
