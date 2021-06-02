@@ -13,11 +13,13 @@ const Main = styled.div`
 `;
 
 const AppContainer = styled.div`
-
+  background-color: white;
+  border-radius: 32px;
+  margin: 60px;
+  box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
 `;
 
 const Top = styled.div`
-
 `;
 
 const Bottom = styled.div`
