@@ -19,11 +19,12 @@ const AppContainer = styled.div`
   box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
 `;
 
-const Top = styled.div`
+const AppTop = styled.div`
 `;
 
-const Bottom = styled.div`
-
+const AppBottom = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 class App extends React.Component {
@@ -31,13 +32,14 @@ class App extends React.Component {
     return (
       <Main>
         <AppContainer>
-          <Top>
+          <AppTop>
             <Current />
-          </Top>
-          <Bottom>
+          </AppTop>
+
+          <AppBottom>
             <OtherCities />
             <Forecast />
-          </Bottom>
+          </AppBottom>
         </AppContainer>
       </Main>
     )
