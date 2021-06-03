@@ -170,7 +170,7 @@ class Current extends React.Component {
 
       <Right>
           <CurrentCityContainer>
-            <CurrentCity>Shanghai</CurrentCity>
+            <CurrentCity>ShangHai</CurrentCity>
           </CurrentCityContainer>
           
         

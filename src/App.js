@@ -25,6 +25,7 @@ const AppTop = styled.div`
 const AppBottom = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 36px 0;
 `;
 
 class App extends React.Component {
