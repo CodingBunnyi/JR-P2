@@ -28,6 +28,11 @@ const AppBottom = styled.div`
   padding: 36px 0;
 `;
 
+const VerticalLine = styled.div`
+  width: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+`;
+
 class App extends React.Component {
   render() {
     return (
@@ -39,6 +44,7 @@ class App extends React.Component {
 
           <AppBottom>
             <OtherCities />
+            <VerticalLine />
             <Forecast />
           </AppBottom>
         </AppContainer>

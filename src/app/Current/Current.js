@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import VerticalLine from '~/components/VerticalLine';
 import Temperature from '~/components/Temperature';
 // import Temperature from '../../components/Temperature/';
 const CurrentContainer = styled.div`
@@ -94,6 +93,11 @@ const Bottom = styled.div`
   left: 0;
   right:0;
   bottom: 0;
+`;
+
+const VerticalLine = styled.div`
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.7);
 `;
 
 
