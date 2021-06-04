@@ -12,17 +12,33 @@ const CurrentContainer = styled.div`
   color: white;
   padding: 64px 0;
   position: relative;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding: 40px 0;
+  }
 `;
 
 const Left = styled.div`
   padding:0 96px;
+  @media screen and (max-width: 1024px) {
+    padding: 0 24px;
+  }
 `;
 
 const Right = styled.div`
   padding: 0 96px;
+  @media screen and (max-width: 1024px) {
+    order: -1;
+    text-align: center;
+    padding: 0 24px;
+  }
 `;
 
 const CurrentWeatherContainer = styled.div`
+  text-align: center;
+`;
+
+const CurrentTemperatureContainer = styled.div`
   text-align: center;
 `;
 
@@ -66,11 +82,13 @@ const MetaValue = styled.span`
 const CurrentCityContainer = styled.div`
   position: relative;
   display: inline-block;
-  
 `;
 
 const CurrentCity = styled.h1`
   font-weight: 500;
+  font-size: 2rem;
+  margin: 0.8rem;
+  border-radius: 2px;
   &:after {
     content:"";
     position: absolute;
@@ -83,6 +101,14 @@ const CurrentCity = styled.h1`
     margin-left:auto;
     margin-right: auto;
     margin-top: 1rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    font-weight: 300;
+    margin: 0.8rem;
+    &:after {
+      height:2px;
+    }
   }
 `;
 
@@ -147,9 +173,9 @@ class Current extends React.Component {
     return (
       <CurrentContainer>
       <Left>
-        <div>
+        <CurrentTemperatureContainer>
           <CurrentTemperature>16.14 &#176;</CurrentTemperature>
-        </div>
+        </CurrentTemperatureContainer>
 
         <CurrentWeatherContainer>
           <CurrentWeather>Clouds</CurrentWeather>

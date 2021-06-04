@@ -5,6 +5,10 @@ import SubTitle from '~/components/SubTitle';
 const ForecastContainer = styled.div`
   padding: 0 48px;
   flex: 1;
+  @media screen and (max-width: 1024px) {
+    order: -1;
+    padding: 24px 36px;
+  }
 `;
 
 const ForecastWeathers = styled.div`

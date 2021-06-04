@@ -5,6 +5,11 @@ import SubTitle from '~/components/SubTitle';
 const OtherCitiesContainer = styled.div`
   padding: 0 48px;
 
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding: 24px 36px;
+    border-top: 1px solid rgba(0,0,0,.2);
+  }
 `;
 
 const City = styled.button`

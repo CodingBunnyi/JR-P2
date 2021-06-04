@@ -26,6 +26,10 @@ const AppBottom = styled.div`
   display: flex;
   flex-direction: row;
   padding: 36px 0;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 
 const VerticalLine = styled.div`
