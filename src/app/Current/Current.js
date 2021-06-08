@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Temperature from '~/components/Temperature';
-// import Temperature from '../../components/Temperature/';
+
 const CurrentContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -40,10 +39,17 @@ const CurrentWeatherContainer = styled.div`
 
 const CurrentTemperatureContainer = styled.div`
   text-align: center;
+  @media screen and (max-width: 1024px) {
+    margin-top: 3rem;
+  }
 `;
 
 const CurrentTemperature = styled.span`
   font-size: 5rem;
+  @media screen and (max-width: 1024px) {
+    font-size: 3rem;
+    text-align: center;
+  }
 `;
 
 const CurrentWeather = styled.span`
@@ -127,7 +133,7 @@ const VerticalLine = styled.div`
 `;
 
 
-const Shanghai = '1796231';
+// const Shanghai = '1796231';
 
 // const getCurrentCityWeather = (handleWeatherChange) => {
 //   const basPath = 'https://api.openweathermap.org/data/2.5';

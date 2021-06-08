@@ -28,6 +28,7 @@ const CityName = styled.h3`
   font-weight: 400;
   letter-spacing: 1px;
   font-size: 1rem;
+  flex: 1;
 `;
 
 const CityTemperature = styled.span`
@@ -40,41 +41,85 @@ const WeatherImg = styled.img`
   width: 50px;
 `;
 
-const OtherCities = () => {
-  return (
-    <OtherCitiesContainer>
-      <SubTitle>
-        Other Cities
-      </SubTitle>
+const MoreCitiesButton = styled.button`
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-weight: 300;
+  display: ${({ toggle }) => toggle ? 'none' : 'block'};
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
 
-      <City>
-        <CityName>SuZhou</CityName>
-        
-        <CityTemperature>21 &#176;</CityTemperature>
-        
-        <WeatherImg src="http://openweathermap.org/img/wn/04d.png" alt="Clouds"/>
+const OtherCitiesSection = styled.div`
+  display: ${({ toggle }) => toggle ? 'flex' : 'none'};
+  flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+`;
 
-      </City>
+class OtherCities extends React.Component {
+  constructor(props) {
+    super(props);
 
-      <City>
-        <CityName>WuXi</CityName>
-        
-        <CityTemperature>18 &#176;</CityTemperature>
-        
-        <WeatherImg src="http://openweathermap.org/img/wn/11d@2x.png" alt="Thunderstorm"/>
+    this.state = {
+      toggle: false,
+    }
+  }
 
-      </City>
+  toggleMoreCities() {
+    this.setState({
+      toggle: true,
+    })
+  }
 
-      <City>
-        <CityName>KunShan</CityName>
-        
-        <CityTemperature>21 &#176;</CityTemperature>
-        
-        <WeatherImg src="http://openweathermap.org/img/wn/01d@2x.png" alt="Clear"/>
+  render() {
+    const { toggle } = this.state;
 
-      </City>
-    </OtherCitiesContainer>
-  );
+    return (
+      <OtherCitiesContainer>
+        <MoreCitiesButton toggle={toggle} onClick={()=>this.toggleMoreCities()}>
+          View More Cities...
+        </MoreCitiesButton>
+  
+        <OtherCitiesSection toggle={toggle}>
+          <SubTitle>
+            Other Cities
+          </SubTitle>
+  
+          <City>
+            <CityName>SuZhou</CityName>
+            
+            <CityTemperature>21 &#176;</CityTemperature>
+            
+            <WeatherImg src="http://openweathermap.org/img/wn/04d.png" alt="Clouds"/>
+  
+          </City>
+  
+          <City>
+            <CityName>WuXi</CityName>
+            
+            <CityTemperature>18 &#176;</CityTemperature>
+            
+            <WeatherImg src="http://openweathermap.org/img/wn/11d@2x.png" alt="Thunderstorm"/>
+  
+          </City>
+  
+          <City>
+            <CityName>KunShan</CityName>
+            
+            <CityTemperature>21 &#176;</CityTemperature>
+            
+            <WeatherImg src="http://openweathermap.org/img/wn/01d@2x.png" alt="Clear"/>
+  
+          </City>
+        </OtherCitiesSection>
+      </OtherCitiesContainer>
+    );
+  }
+  
 };
 
 export default OtherCities;
