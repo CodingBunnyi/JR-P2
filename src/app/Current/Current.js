@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import OpenWeatherMap from '../../utils/OpenWeatherMap';
 
 const CurrentContainer = styled.div`
   display: flex;
@@ -133,65 +134,60 @@ const VerticalLine = styled.div`
 `;
 
 
-// const Shanghai = '1796231';
+const SHANGHAI_CITY_ID = '1796231';
 
-// const getCurrentCityWeather = (handleWeatherChange) => {
-//   const basPath = 'https://api.openweathermap.org/data/2.5';
-//   const units = 'metric';
-//   const appid = 'c0167be7a6c2cff178697b61e8b2e2cd';
-
-//   const url = `${basPath}/weather?id=${Shanghai}&units=${units}&appid=${appid}`;
-
-//   const xhttp = new XMLHttpRequest();
-
-//   xhttp.onreadystatechange = function() {
-//       if (this.readyState == 4 && this.status == 200) {
-//         const data = JSON.parse(xhttp.responseText);
-//         handleWeatherChange(data);
-//       }
-//   };
-//   xhttp.open('GET', url, true);
-//   xhttp.send();
-// };
+const getCurrentCityWeather = () => OpenWeatherMap.get(`weather`, {
+  params: {
+    id: SHANGHAI_CITY_ID,
+  },
+}).then((response) => response.data);
 
 class Current extends React.Component {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-  //   this.state = {
-  //     weather: undefined,
-  //   };
+    this.state = {
+      data: undefined,
+    };
 
-  //   this.handleWeatherChange = this.handleWeatherChange.bind(this);
-  // };
+    this.handleDataChange = this.handleDataChange.bind(this);
+  };
 
-  // handleWeatherChange(newWeather) {
-  //   this.setState({
-  //     weather: newWeather,
-  //   });
-  // };
+  handleDataChange(newData) {
+    this.setState({
+      data: newData,
+    });
+  };
 
-  // componentDidMount() {
-  //   getCurrentCityWeather(this.handleWeatherChange);
-  // }
+  componentDidMount() {
+    getCurrentCityWeather().then(this.handleDataChange);
+  }
   
   render() {
+    const { data } = this.state;
+
+    console.log(data);
+
+    if(!data) {
+      return 'Loading';
+    }
+
     return (
       <CurrentContainer>
       <Left>
         <CurrentTemperatureContainer>
-          <CurrentTemperature>16.14 &#176;</CurrentTemperature>
+          <CurrentTemperature>{data.main.temp} &#176;</CurrentTemperature>
         </CurrentTemperatureContainer>
 
         <CurrentWeatherContainer>
-          <CurrentWeather>Clouds</CurrentWeather>
+          <CurrentWeather>{data.weather[0].main}</CurrentWeather>
         </CurrentWeatherContainer>
 
         <CurrentMetasContainer>
           <HumidityContainer>
             <Metatitle>HUMIDITY</Metatitle>
             <br />
-            <MetaValue>66%</MetaValue>
+            <MetaValue>{data.main.humidity} %</MetaValue>
           </HumidityContainer>
 
           <VerticalLine />
@@ -199,7 +195,7 @@ class Current extends React.Component {
           <WindContainer>
             <Metatitle>WIND</Metatitle>
             <br />
-            <MetaValue>0.98 K/M</MetaValue>
+            <MetaValue>{data.wind.speed} KM/H</MetaValue>
           </WindContainer>
         </CurrentMetasContainer>
       </Left>

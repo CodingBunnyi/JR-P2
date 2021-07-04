@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SubTitle from '~/components/SubTitle';
+import OpenWeatherMap from '../../utils/OpenWeatherMap';
 
 const OtherCitiesContainer = styled.div`
   padding: 0 48px;
@@ -60,13 +61,34 @@ const OtherCitiesSection = styled.div`
   }
 `;
 
+const OTHER_CITIES= [{
+  name: 'Suzhou', id: '1886760', 
+}, {
+  name: 'Beijing', id: '2038349',
+}, {
+  name: 'Guangzhou' , id:'1809858',
+}];
+
+const getOtherCitiesWeather = () => {
+  const otherCitiesId = OTHER_CITIES.map((city) => city.id).join(',');
+
+  return OpenWeatherMap.get(`group`, {
+    params: {
+      id: otherCitiesId,
+    }
+  }).then((response) => response.data);
+};
+
 class OtherCities extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       toggle: false,
+      data: undefined,
     }
+
+    this.handleDataChange = this.handleDataChange.bind(this);
   }
 
   toggleMoreCities() {
@@ -75,10 +97,28 @@ class OtherCities extends React.Component {
     })
   }
 
+  handleDataChange(newData) {
+    this.setState({
+      data: newData,
+    });
+  }
+
+  componentDidMount() {
+    getOtherCitiesWeather().then(this.handleDataChange);
+  }
+
   render() {
+    const { data } = this.state;
     const { toggle } = this.state;
 
+    console.log(data);
+
+    if(!data) {
+      return 'Loading';
+    }
+
     return (
+
       <OtherCitiesContainer>
         <MoreCitiesButton toggle={toggle} onClick={()=>this.toggleMoreCities()}>
           View More Cities...
@@ -88,33 +128,18 @@ class OtherCities extends React.Component {
           <SubTitle>
             Other Cities
           </SubTitle>
+
+          {data.list.map(({id, name, main: { temp }, weather: [{ icon, main }]}) => (
+            <City key={id}>
+              <CityName>{name}</CityName>
+              
+              <CityTemperature>{temp} &#176;</CityTemperature>
+              
+              <WeatherImg src={`http://openweathermap.org/img/wn/${icon}.png`} alt={main}/>
   
-          <City>
-            <CityName>SuZhou</CityName>
-            
-            <CityTemperature>21 &#176;</CityTemperature>
-            
-            <WeatherImg src="http://openweathermap.org/img/wn/04d.png" alt="Clouds"/>
-  
-          </City>
-  
-          <City>
-            <CityName>WuXi</CityName>
-            
-            <CityTemperature>18 &#176;</CityTemperature>
-            
-            <WeatherImg src="http://openweathermap.org/img/wn/11d@2x.png" alt="Thunderstorm"/>
-  
-          </City>
-  
-          <City>
-            <CityName>KunShan</CityName>
-            
-            <CityTemperature>21 &#176;</CityTemperature>
-            
-            <WeatherImg src="http://openweathermap.org/img/wn/01d@2x.png" alt="Clear"/>
-  
-          </City>
+            </City>
+          ))}
+          
         </OtherCitiesSection>
       </OtherCitiesContainer>
     );
