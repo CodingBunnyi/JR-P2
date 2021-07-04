@@ -22,6 +22,7 @@ const City = styled.button`
   cursor: pointer;
   text-align: left;
   padding: 0;
+  width:100%;
 `;
 
 const CityName = styled.h3`
